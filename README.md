@@ -9,31 +9,35 @@ seed dispersal) and fungal-wilt pathogen pressure.
 ## Authors
 
 
-> Emma L Underwood*^a^, Kerry A Brown^a^, Rebekka Allgayer^b^, Mark Mulligan^c^, Nigel Walford^a^, Jette Wolff^d^.
-*Corresponding author
+Emma L Underwood^*a^, Kerry A Brown^a^, Rebekka Allgayer^b^, Mark Mulligan^c^, Nigel Walford^a^, Jette Wolff^d^.
 
-> ^a^ Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
-> ^b^ School of Biological Sciences, University of Aberdeen, King's College, Aberdeen, AB24 3FX, UK
-> ^c^ Department of Geography, King’s College London, 30 Aldwych, London, WC2B 4BG, UK 
-> ^d^ Institute of Biochemistry and Biology, University of Potsdam, Maulbeerallee 3, 14469, Potsdam, Germany
+^*^Corresponding author
+
+^a^ Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
+
+^b^ School of Biological Sciences, University of Aberdeen, King's College, Aberdeen, AB24 3FX, UK
+
+^c^ Department of Geography, King’s College London, 30 Aldwych, London, WC2B 4BG, UK 
+
+^d^ Institute of Biochemistry and Biology, University of Potsdam, Maulbeerallee 3, 14469, Potsdam, Germany
 
 
-Code here was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
+Code was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
 
 
 ## Funding
 
 
-> * [Royal Geographical Society (with IBG), Researcher Award Grant (including Albert Reckitt Award and Dudley Stamp 
-Memorial Award), PRA47.22, Emma L Underwood.]
-> * [Kingston University London, Research Degree Studentship in the Faculty of Science, Engineering and Computing, School of 
-Engineering and Environment, Emma L Underwood (formerly Hall).]
+- Royal Geographical Society (with IBG), Researcher Award Grant (including Albert Reckitt Award and Dudley Stamp 
+Memorial Award), PRA47.22, Emma L Underwood.
+- Kingston University London, Research Degree Studentship in the Faculty of Science, Engineering and Computing, School of 
+Engineering and Environment, Emma L Underwood (formerly Hall).
 
 ## Related publication
 
-> This repository contains the R scripts needed to reproduce the analyses and
-> figures in manuscript *Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot* by *Underwood, E.L., Brown, K.A., Allgayer, R., Mulligan, M., Walford, N., Wolff, J.*, submitted in 2026.
-> DOI: * [TBC pending pre-print/peer review]*
+This repository contains the R scripts needed to reproduce the analyses and
+figures in manuscript *Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot* by *Underwood, E.L., Brown, K.A., Allgayer, R., Mulligan, M., Walford, N., Wolff, J.*, submitted in 2026.
+DOI: * [TBC pending pre-print/peer review]*
 
 ## Summary/Abstract
 
@@ -185,7 +189,7 @@ to its scenario.
 source("00__data_preparation.R")      # build model inputs (needs Zenodo data first)
 source("01__simulations.R")           # run simulations (requires HPC access)
 source("01b__simulation_validation.R")# summarise / validate runs
-source("02__process_results.R")       # aggregate results + Supp. Figs S2, S3
+source("02__process_results.R")       # aggregate results + Supp. Figs
 source("03__occupancy_probability.R") # occupancy rasters + points for mapping
 source("04__publication_figures.R")   # main manuscript figures
 ```
@@ -196,7 +200,7 @@ Set any cluster-specific library paths for your HPC.
 
 **Figures (transparency for review).** Final manuscript figures were
 assembled from a mix of R, QGIS and Canva; R outputs are the analytical
-originals and differ visually from the published versions (fonts, colours,
+originals and differ only visually from the published versions (fonts, colours,
 annotation, cropping).
 
 | Manuscript figure | Produced with | Source in this repository |
