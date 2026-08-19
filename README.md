@@ -9,8 +9,16 @@ seed dispersal) and fungal-wilt pathogen pressure.
 ## Authors
 
 
-> Emma L Underwood, Kerry A Brown, Rebekka Allgayer, Mark Mulligan, Nigel Walford, Jette Wolff
-> Code found here was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
+> Emma L Underwood*^a^, Kerry A Brown^a^, Rebekka Allgayer^b^, Mark Mulligan^c^, Nigel Walford^a^, Jette Wolff^d^.
+*Corresponding author
+
+> ^a^ Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
+> ^b^ School of Biological Sciences, University of Aberdeen, King's College, Aberdeen, AB24 3FX, UK
+> ^c^ Department of Geography, King’s College London, 30 Aldwych, London, WC2B 4BG, UK 
+> ^d^ Institute of Biochemistry and Biology, University of Potsdam, Maulbeerallee 3, 14469, Potsdam, Germany
+
+
+Code here was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
 
 
 ## Funding
@@ -24,23 +32,28 @@ Engineering and Environment, Emma L Underwood (formerly Hall).]
 ## Related publication
 
 > This repository contains the R scripts needed to reproduce the analyses and
-> figures in *Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot* by *[author list]*, [journal / preprint], [year].
-> DOI: * [TBC]*
+> figures in manuscript *Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot* by *Underwood, E.L., Brown, K.A., Allgayer, R., Mulligan, M., Walford, N., Wolff, J.*, submitted in 2026.
+> DOI: * [TBC pending pre-print/peer review]*
 
 ## Summary/Abstract
 
-*Context*
+**Context**
 Tropical endemic forests face multiple stressors of climate change, deforestation, defaunation and emerging pathogens and diseases, yet most biodiversity forecasts model these pressures in isolation or with non-spatially explicit methods, limiting their ability to support comprehensive conservation efforts.
-*Objectives*
+
+**Objectives**
 We quantify how multiple global-change stressors acting through habitat change, dispersal limitation and emerging disease jointly shape population persistence and test whether their combined effects generate greater declines than would be expected from individual drivers acting alone.
-*Methods*
+
+**Methods**
 Using the individual-based modelling platform RangeShifter, we simulated population and occupancy dynamics across 30 scenarios combining future changes to habitat suitability based on combined climate and deforestation predictions, three levels of lemur defaunation, and spatially explicit wilt pathogen spread.
-*Results*
+
+**Results**
 Climate change and deforestation alone drove occupancy declines exceeding 90% under high-emissions scenarios, with rapid contractions tracking landscape step-changes in habitat suitability. Lemur defaunation independently reduced starting occupancy by 78–93% relative to baseline, irrespective of climate trajectory, and accelerated spatial fragmentation of reproductive populations. Where wilt pathogen dynamics were incorporated, local extirpation occurred within 13–34 years of introduction across all scenario combinations, with populations subject to prior climate and defaunation stress collapsing up to seven years faster.
-*Conclusion*
+
+**Conclusion**
 Our results support a shift from single-threat forecasting to multi-threat ecological assessment, in which persistence is determined by the outcome of interactive abiotic and biotic processes across space and time. Long-term persistence in tropical biodiversity hotspots will depend on retaining climatically suitable refugia, as well as maintaining species interactions and demographic processes that allow populations to function within them, emphasising the need for multi-threat frameworks in future conservation risk assessments.
 
-*Keywords*: climate change, tropics, endemism, biodiversity hotspot, mechanistic model, scenario
+
+**Keywords**: climate change, tropics, endemism, biodiversity hotspot, mechanistic model, scenario
 
 
 ## Requirements
@@ -48,28 +61,23 @@ Our results support a shift from single-threat forecasting to multi-threat ecolo
 The workflow was developed and run in R. To reproduce the computational
 environment:
 
-
-**1. Install RangeShiftR v3.0.0** (not on CRAN; pinned to the released tag):
+**1. Install RangeShiftR v3.0.0** (this is currently not possible on CRAN; use pak package):
 
 ```r
 # install.packages("pak")
 pak::pak("RangeShifter/RangeShiftR-pkg/RangeShiftR@v3.0.0")
 ```
 
-**2. Open the project via `*<project>.Rproj`** so that all paths resolve through
-`here::here()` from the repository root. No `setwd()` is required.
+**2. Open the project via `RProj_Underwood-global-change-drivers-accelerate-biodiversity-loss-2026.Rproj`** so that all paths resolve through
+`here::here()` from the repository root folder.
 
-**Programming environment used for the published results**
+**Programming environment used**
 
-<!-- * Paste the output of sessionInfo() (or better, the grateful package list)
-     from the machine that produced the final results. Fill the placeholders. -->
-
-- Operating system: *[e.g. Ubuntu 22.04 LTS / Windows 11 / macOS 14]*
-- R version: *R version 4.0.4 (2021-02-15) and R version 4.5*
-- Simulations were run on *[University of Potsdam HPC / Ecology & MacroEcology HPC(s), cores, RAM]*.
+- Operating system: 
+- R version: *R version 4.0.4 (2021-02-15) and R version 4.5.0*
+- Simulations were run on *[University of Potsdam HPC / Ecology & MacroEcology HPC(s), with 4 cores, and 200GB RAM]*.
 - Key R packages: RangeShiftR (3.0.0), terra, data.table, dplyr, tidyr, ggplot2,
-  patchwork, cowplot, scales, viridis, foreach, doParallel. *[Confirm/extend
-  from the generated list below.]*
+  patchwork, cowplot, scales, viridis, foreach, doParallel.
 
 Generated the full, citable package list with
 [`grateful`](https://pakillo.github.io/grateful/):
@@ -126,23 +134,23 @@ The exact repository state accompanying the manuscript is tagged in Git as
 ```bash
 ├── README.md
 ├── LICENSE
-├── *<project>.Rproj              # RStudio project (sets working directory)
+├── RProj_Underwood-global-change-drivers-accelerate-biodiversity-loss-2026.Rproj # RStudio project (sets working directory)
 ├── .gitignore                    # excludes large generated outputs
 ├── config.R                      # project root (here::here) + package loading
-├── R/                            # all reusable functions, grouped by stage
+├── R/                            # all reusable functions, grouped by script / stage
 │   ├── functions_utils.R         #   generic helpers (load, cleanup, timing)
-│   ├── functions_data_prep.R     #   landscape / pathogen layer builders
-│   ├── functions_simulation.R    #   simulation setup + memory management
+│   ├── functions_data_prep.R     #   landscape / pathogen layer building
+│   ├── functions_simulation.R    #   simulation setup + memory management for HPC
 │   ├── functions_results.R       #   aggregation, refugial + range-shift metrics
 │   ├── functions_occupancy.R     #   occupancy rasters + points (stage 03)
-│   └── functions_figures.R       #   publication figure builders
+│   └── functions_figures.R       #   publication figures
 ├── 00__data_preparation.R        # crop/align SDMs -> RangeShiftR input matrices
 ├── 01__simulations.R             # run the 30 scenario simulations
 ├── 01b__simulation_validation.R  # summarise runs -> simulation_validation.csv
-├── 02__process_results.R         # range aggregation, metrics, Supp. Figs S2/S3
+├── 02__process_results.R         # range aggregation, metrics, Supp. Figs
 ├── 03__occupancy_probability.R   # Pop files -> occupancy rasters + points
 ├── 04__publication_figures.R     # main manuscript figures (Fig 3/4/5)
-├── data/                         # small, version-controlled inputs
+├── data/                         # small inputs
 │   ├── StudyArea/                #   templates, AOI, PA + ecoregion layers
 │   └── SDM_ensemble/             #   (populate from Zenodo before running 00)
 └── outputs/                      # generated; git-ignored except final figures
@@ -171,10 +179,9 @@ The scenario-to-`sim_id` map is written to
 `outputs/simulations/Master_simulation_mapping.csv` and links every output file
 to its scenario.
 
-**Workflow order.**
+**Workflow order:**
 
 ```r
-renv::restore()                       # once
 source("00__data_preparation.R")      # build model inputs (needs Zenodo data first)
 source("01__simulations.R")           # run simulations (requires HPC access)
 source("01b__simulation_validation.R")# summarise / validate runs
@@ -184,10 +191,10 @@ source("04__publication_figures.R")   # main manuscript figures
 ```
 
 `01__simulations.R` is memory-intensive; it is designed to run in sim-index
-chunks (e.g. `1:9`, `10:18`, `19:30`) as separate HPC jobs. Set any
-cluster-specific library paths in your job script, not in the R code.
+chunks (e.g. `1:9`, `10:18`, `19:30`) as separate HPC jobs. 
+Set any cluster-specific library paths for your HPC.
 
-**Figure provenance (transparency for review).** Final manuscript figures were
+**Figures (transparency for review).** Final manuscript figures were
 assembled from a mix of R, QGIS and Canva; R outputs are the analytical
 originals and differ visually from the published versions (fonts, colours,
 annotation, cropping).
@@ -205,10 +212,10 @@ annotation, cropping).
 | Figure S4 | R rasters → QGIS | starting occupancy, Sims 1,5,9 (`OccRasters`) |
 | Figure S5 | R | baseline population dynamics ± SD, Sim 1 with High Climate & Deforestation scenarios (`02__process_results.R`) |
 
-**Coordinate handling.** RangeShiftR uses a false origin (0,0); `x`/`y` in the
+**Coordinates** RangeShiftR uses a false origin (0,0); `x`/`y` in the
 Pop files are 0-based cell indices. `03__occupancy_probability.R` converts these
 to projected cell centres (ESRI:102022, Africa Albers Equal Area Conic) against
-the 100 m template before writing rasters.
+the 100 m study area template before writing rasters.
 
 ## License
 
