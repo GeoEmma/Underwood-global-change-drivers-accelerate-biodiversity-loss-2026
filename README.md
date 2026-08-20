@@ -9,17 +9,20 @@ seed dispersal) and fungal-wilt pathogen pressure.
 ## Authors
 
 
-Emma L Underwood^*a^, Kerry A Brown^a^, Rebekka Allgayer^b^, Mark Mulligan^c^, Nigel Walford^a^, Jette Wolff^d^.
+Emma L Underwood^1,*^, Kerry A Brown^1^, Rebekka Allgayer^2^, Mark Mulligan^3^, Nigel Walford^1^, Jette Wolff^4^.
 
-^*^Corresponding author
 
-^a^ Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
+1. Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
 
-^b^ School of Biological Sciences, University of Aberdeen, King's College, Aberdeen, AB24 3FX, UK
+2. School of Biological Sciences, University of Aberdeen, King's College, Aberdeen, AB24 3FX, UK
 
-^c^ Department of Geography, King’s College London, 30 Aldwych, London, WC2B 4BG, UK 
+3. Department of Geography, King’s College London, 30 Aldwych, London, WC2B 4BG, UK 
 
-^d^ Institute of Biochemistry and Biology, University of Potsdam, Maulbeerallee 3, 14469, Potsdam, Germany
+4. Institute of Biochemistry and Biology, University of Potsdam, Maulbeerallee 3, 14469, Potsdam, Germany
+
+
+*Corresponding author: Emma L Underwood
+Email: [elmah2707@gmail.com](mailto:elmah2707@gmail.com)
 
 
 Code was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
@@ -36,10 +39,10 @@ Engineering and Environment, Emma L Underwood (formerly Hall).
 ## Related publication
 
 This repository contains the R scripts needed to reproduce the analyses and
-figures in manuscript *Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot* by *Underwood, E.L., Brown, K.A., Allgayer, R., Mulligan, M., Walford, N., Wolff, J.*, submitted in 2026.
-DOI: * [TBC pending pre-print/peer review]*
+figures in manuscript *Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot* by Underwood, E.L., Brown, K.A., Allgayer, R., Mulligan, M., Walford, N., Wolff, J., submitted in 2026.
+DOI: * [TBC pending pre-print/peer review]
 
-## Summary/Abstract
+## Abstract
 
 **Context**
 Tropical endemic forests face multiple stressors of climate change, deforestation, defaunation and emerging pathogens and diseases, yet most biodiversity forecasts model these pressures in isolation or with non-spatially explicit methods, limiting their ability to support comprehensive conservation efforts.
@@ -60,7 +63,7 @@ Our results support a shift from single-threat forecasting to multi-threat ecolo
 **Keywords**: climate change, tropics, endemism, biodiversity hotspot, mechanistic model, scenario
 
 
-## Requirements
+## Workflow requirements
 
 The workflow was developed and run in R. To reproduce the computational
 environment:
@@ -77,19 +80,11 @@ pak::pak("RangeShifter/RangeShiftR-pkg/RangeShiftR@v3.0.0")
 
 **Programming environment used**
 
-- Operating system: 
-- R version: *R version 4.0.4 (2021-02-15) and R version 4.5.0*
-- Simulations were run on *[University of Potsdam HPC / Ecology & MacroEcology HPC(s), with 4 cores, and 200GB RAM]*.
-- Key R packages: RangeShiftR (3.0.0), terra, data.table, dplyr, tidyr, ggplot2,
-  patchwork, cowplot, scales, viridis, foreach, doParallel.
+- Platform: x86_64-pc-linux-gnu
+- R version: *R version 4.5.2 (2025-10-31)*
+- Attached R packages: RangeShiftR (3.0.0), terra (1.9-11), data.table (1.18.2.1), dplyr (1.2.0), tidyr (1.3.2), ggplot2 (4.0.2),
+  patchwork (1.3.2), cowplot (1.2.0), scales (1.4.0), viridis (0.6.5), foreach (1.5.2), doParallel (1.0.17).
 
-Generated the full, citable package list with
-[`grateful`](https://pakillo.github.io/grateful/):
-
-```r
-library(grateful)
-cite_packages(output = "paragraph", out.dir = ".")
-```
 
 **Additional (non-R) software used**
 
@@ -100,8 +95,7 @@ cite_packages(output = "paragraph", out.dir = ".")
 
 **Repository version / release**
 
-The exact repository state accompanying the manuscript is tagged in Git as
-*TBC -  make release
+The exact repository state accompanying the manuscript is tagged in Git as a release.
 
 ## Data availability
 
@@ -138,7 +132,7 @@ The exact repository state accompanying the manuscript is tagged in Git as
 ```bash
 ├── README.md
 ├── LICENSE
-├── RProj_Underwood-global-change-drivers-accelerate-biodiversity-loss-2026.Rproj # RStudio project (sets working directory)
+├── RProj_Underwood-global-change-drivers-2026.Rproj # RStudio project (sets working directory)
 ├── .gitignore                    # excludes large generated outputs
 ├── config.R                      # project root (here::here) + package loading
 ├── R/                            # all reusable functions, grouped by script / stage
@@ -164,7 +158,7 @@ The exact repository state accompanying the manuscript is tagged in Git as
     └── figures/
 ```
 
-## Details
+## Simulation details
 
 **Experimental design (30 simulations).** Three climate scenarios
 (`current`, SSP1-2.6 = "Low", SSP5-8.5 = "High"), three defaunation levels set
@@ -178,7 +172,7 @@ pathogen-introduction timing across four batches:
 | 3 | SSP1 / SSP5 | Low / Medium / High | year 131 (31-yr pre-conditioning) | 6 |
 | 4 | SSP1 / SSP5 | Low / Medium / High | year 161 (61-yr pre-conditioning) | 6 |
 
-SSP3 was evaluated during development and excluded from the final study.
+SSP3 was evaluated during development and excluded from our final study.
 The scenario-to-`sim_id` map is written to
 `outputs/simulations/Master_simulation_mapping.csv` and links every output file
 to its scenario.
@@ -200,8 +194,7 @@ Set any cluster-specific library paths for your HPC.
 
 **Figures (transparency for review).** Final manuscript figures were
 assembled from a mix of R, QGIS and Canva; R outputs are the analytical
-originals and differ only visually from the published versions (fonts, colours,
-annotation, cropping).
+originals and differ only in fonts, colours, annotation, and cropping.
 
 | Manuscript figure | Produced with | Source in this repository |
 |-------------------|---------------|---------------------------|
@@ -222,6 +215,5 @@ to projected cell centres (ESRI:102022, Africa Albers Equal Area Conic) against
 the 100 m study area template before writing rasters.
 
 ## License
-
 
 > This project is released under the *GNU General Public License v3.0* license. See `LICENSE`.

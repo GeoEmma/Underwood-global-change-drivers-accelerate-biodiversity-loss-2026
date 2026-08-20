@@ -127,14 +127,14 @@ range_rel <- range_mean |>
 
 # 1e.  Per-replicate extinction timing (needed for Figure 3 SE) ----
 # For each rep in each pathogen sim, find the last year NInd_stage4 > 0.
-# Done on range_raw so we have rep-level variance.
+# Done on range_raw so there is rep-level variance.
 ext_per_rep <- range_raw[NInd_stage4 > 0 & batch_num > 1,
                          .(last_adult_year = max(Year)),
                          by = .(batch_num, sim_id, Rep)
 ]
 
 # Sims where a rep survived to year 200: last_adult_year is a lower bound.
-# Flag as censored so we can note this in the figure.
+# Flag as censored to note this in the figure.
 ext_per_rep[, censored := (last_adult_year >= 200L)]
 
 # Add scenario labels and pathogen year
@@ -199,9 +199,8 @@ DEFAUNATION_STRIP <- c(
 # NOTE: add_defaunation_strip() moved to R/functions_figures.R
 
 
-
 # =============================================================================#
-# FIGURE 1  —  Stressor hierarchy ----
+# FIGURE 1: Stressor hierarchy ----
 # =============================================================================#
 # (a)  Absolute occupancy — shows the three climate lines per defaunation panel
 # (b)  Relative change    — makes the defaunation-dominance argument explicit
@@ -408,7 +407,7 @@ cat("Figure 1 saved.\n")
 
 
 # =============================================================================#
-# FIGURE 2  —  Spatial refugia ----
+# FIGURE 2: Spatial refugia ----
 # =============================================================================#
 # All 9 Batch 1 scenarios shown as overlaid range boundary polygons on one map.
 # Colour = climate scenario; linetype = defaunation level.
@@ -631,7 +630,7 @@ ggsave(file.path(plot_dir, "Figure2_spatial_refugia.png"),
 cat("Figure 2 saved.\n")
 
 # =============================================================================#
-# FIGURE 3  —  Pathogen tipping point ----
+# FIGURE 3: Pathogen tipping points ----
 # =============================================================================#
 # Heatmap of mean years to extinction after pathogen introduction.
 # Rows = defaunation level; columns = climate scenario.
