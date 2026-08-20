@@ -200,19 +200,20 @@ DEFAUNATION_STRIP <- c(
 
 
 # =============================================================================#
-# FIGURE 1: Stressor hierarchy ----
+# FIGURE 3: Occupancy trends ----
 # =============================================================================#
 # (a)  Absolute occupancy — shows the three climate lines per defaunation panel
 # (b)  Relative change    — makes the defaunation-dominance argument explicit
-# (c)  Decline-rate heatmap — shows Climate x Defaunation interaction in one cell
+# (c)  Decline-rate grid — shows Climate x Defaunation interactions in one cell
 # =============================================================================#
+
 
 b1 <- range_rel |>
   filter(batch_num == 1) |>
   add_defaunation_strip()
 
 # --- Panel (a): absolute occupancy -------------------------------------------#
-fig1a <- ggplot(b1, aes(x = Year, y = mean_occ, colour = climate, fill = climate)) +
+fig3a <- ggplot(b1, aes(x = Year, y = mean_occ, colour = climate, fill = climate)) +
   geom_ribbon(aes(ymin = ci_lo, ymax = ci_hi), alpha = 0.22, colour = NA) +
   geom_line(size = 0.9, na.rm = TRUE) +
   facet_wrap(~ defaunation_label, ncol = 1, scales = "free_y",
@@ -237,7 +238,7 @@ fig1a <- ggplot(b1, aes(x = Year, y = mean_occ, colour = climate, fill = climate
 
 
 # --- Panel (b): relative change from baseline --------------------------------
-fig1b <- ggplot(
+fig3b <- ggplot(
   b1 |> filter(!is.na(rel_change)),
   aes(x = Year, y = rel_change, colour = climate)
 ) +
@@ -284,7 +285,7 @@ decline_rate <- b1 |>
 # Text colour: white on dark fills (strong decline), dark on light
 text_colour <- ifelse(decline_rate$pct_per_decade < -4, "white", "grey15")
 
-fig1c <- ggplot(
+fig3c <- ggplot(
   decline_rate,
   aes(x = climate, y = defaunation, fill = pct_per_decade)
 ) +
@@ -331,8 +332,8 @@ fig1c <- ggplot(
     legend.position = "none"   # legend saved separately below
   )
 
-# --- Save Figure 1c legend as a standalone file ------------------------------
-fig1c_legend_plot <- ggplot(
+# --- Save Figure 3c legend as a standalone file ------------------------------
+fig3c_legend_plot <- ggplot(
   decline_rate,
   aes(x = climate, y = defaunation, fill = pct_per_decade)
 ) +
@@ -356,12 +357,12 @@ fig1c_legend_plot <- ggplot(
   )
 
 ggsave(file.path(plot_dir, "Figure1c_legend.pdf"),
-       cowplot::get_legend(fig1c_legend_plot),
+       cowplot::get_legend(fig3c_legend_plot),
        width = 2.5, height = 4, dpi = 300)
 ggsave(file.path(plot_dir, "Figure1c_legend.png"),
-       cowplot::get_legend(fig1c_legend_plot),
+       cowplot::get_legend(fig3c_legend_plot),
        width = 2.5, height = 4, dpi = 300, bg = "white")
-cat("Figure 1c legend saved separately.\n")
+cat("Figure 3c legend saved separately.\n")
 
 
 # --- Shared x-axis label strip -----------------------------------------------
@@ -371,7 +372,7 @@ x_label <- ggplot() +
   theme(axis.title.x = element_text(size = 10, face = "plain"))
 
 
-# --- Assemble Figure 1 -------------------------------------------------------
+# --- Assemble Figure 3 -------------------------------------------------------
 # Panels (a) and (b) are tall (3 facets each); (c) is a small square.
 # Layout: [a | b | c] with a shared legend row at bottom.
 
@@ -385,29 +386,29 @@ legend_plot <- ggplot(b1, aes(x = Year, y = mean_occ, colour = climate)) +
         legend.text     = element_text(size = 9))
 shared_legend <- cowplot::get_legend(legend_plot)
 
-fig1_top <- cowplot::plot_grid(
-  fig1a, fig1b, fig1c,
+fig3_top <- cowplot::plot_grid(
+  fig3a, fig3b, fig3c,
   nrow        = 1,
   rel_widths  = c(1.15, 1.15, 0.7),
   align       = "h",
   axis        = "tb"
 )
 
-fig1 <- cowplot::plot_grid(
-  fig1_top, shared_legend,
+fig3 <- cowplot::plot_grid(
+  fig3_top, shared_legend,
   ncol        = 1,
   rel_heights = c(1, 0.07)
 )
 
 ggsave(file.path(plot_dir, "Figure1_stressor_hierarchy.pdf"),
-       fig1, width = 15, height = 10, dpi = 300)
+       fig3, width = 15, height = 10, dpi = 300)
 ggsave(file.path(plot_dir, "Figure1_stressor_hierarchy.png"),
-       fig1, width = 15, height = 10, dpi = 300, bg = "white")
-cat("Figure 1 saved.\n")
+       fig3, width = 15, height = 10, dpi = 300, bg = "white")
+cat("Figure 3 saved.\n")
 
 
 # =============================================================================#
-# FIGURE 2: Spatial refugia ----
+# Figure 4: Spatial refugia ----
 # =============================================================================#
 # All 9 Batch 1 scenarios shown as overlaid range boundary polygons on one map.
 # Colour = climate scenario; linetype = defaunation level.
@@ -560,8 +561,8 @@ current_raster_df <- do.call(rbind, Filter(Negate(is.null), current_raster_list)
 # SSP boundary lines only — Current is shown as filled raster above
 ssp_boundaries <- boundary_df |> filter(climate != "Current")
 
-# Build Figure 2 --------------------------------------------------------------#
-fig2 <- ggplot() +
+# Build Figure 4 --------------------------------------------------------------#
+fig4 <- ggplot() +
   veg_layer +    # ecoregion polygons + scale_fill_identity(guide="none")
   pa_layer +
   # Current climate: semi-transparent grey-scale filled raster.
@@ -624,13 +625,13 @@ fig2 <- ggplot() +
   )
 
 ggsave(file.path(plot_dir, "Figure2_spatial_refugia.pdf"),
-       fig2, width = 14, height = 16, dpi = 300)
+       fig4, width = 14, height = 16, dpi = 300)
 ggsave(file.path(plot_dir, "Figure2_spatial_refugia.png"),
-       fig2, width = 14, height = 16, dpi = 300, bg = "white")
-cat("Figure 2 saved.\n")
+       fig4, width = 14, height = 16, dpi = 300, bg = "white")
+cat("Figure 4 saved.\n")
 
 # =============================================================================#
-# FIGURE 3: Pathogen tipping points ----
+# FIGURE 5: Pathogen tipping points ----
 # =============================================================================#
 # Heatmap of mean years to extinction after pathogen introduction.
 # Rows = defaunation level; columns = climate scenario.
@@ -656,12 +657,12 @@ ext_summary <- ext_summary |>
 
 # Climate labels for x-axis (Batch 2 includes Current; Batches 3/4 don't)
 # We keep the full grid and leave missing combinations blank naturally.
-fig3 <- ggplot(
+fig5 <- ggplot(
   ext_summary,
   aes(x = climate, y = defaunation, fill = mean_yte)
 ) +
   # Slightly inset tiles give a separated "square blocks" appearance
-  # matching Figure 1c style — no external packages needed
+  # matching Figure 3c style — no external packages needed
   geom_tile(colour = "white", size = 2.0, width = 0.90, height = 0.90) +
   geom_text(
     aes(label = cell_label, colour = I(text_col)),
@@ -693,7 +694,7 @@ fig3 <- ggplot(
     limits = CLIMATE_LEVELS,
     labels = c("Current", "Low\n(SSP1-2.6)", "High\n(SSP5-8.5)")
   ) +
-  # Square aspect ratio so tiles are square — matches Figure 1c
+  # Square aspect ratio so tiles are square — matches Figure 3c
   coord_fixed(ratio = 1) +
   labs(
     title    = "Years to extinction after pathogen introduction",
@@ -715,8 +716,8 @@ fig3 <- ggplot(
     legend.position   = "none"    # legend saved separately
   )
 
-# --- Save Figure 3 legend separately -----------------------------------------
-fig3_legend_plot <- ggplot(ext_summary, aes(x = climate, y = defaunation,
+# --- Save Figure 5 legend separately -----------------------------------------
+fig5_legend_plot <- ggplot(ext_summary, aes(x = climate, y = defaunation,
                                             fill = mean_yte)) +
   geom_tile() +
   scale_fill_gradient2(
@@ -739,18 +740,18 @@ fig3_legend_plot <- ggplot(ext_summary, aes(x = climate, y = defaunation,
   )
 
 ggsave(file.path(plot_dir, "Figure3_legend.pdf"),
-       cowplot::get_legend(fig3_legend_plot),
+       cowplot::get_legend(fig5_legend_plot),
        width = 2.5, height = 4, dpi = 300)
 ggsave(file.path(plot_dir, "Figure3_legend.png"),
-       cowplot::get_legend(fig3_legend_plot),
+       cowplot::get_legend(fig5_legend_plot),
        width = 2.5, height = 4, dpi = 300, bg = "white")
-cat("Figure 3 legend saved separately.\n")
+cat("Figure 5 legend saved separately.\n")
 
 ggsave(file.path(plot_dir, "Figure3_pathogen_tipping_point.pdf"),
-       fig3, width = 14, height = 5, dpi = 300)
+       fig5, width = 14, height = 5, dpi = 300)
 ggsave(file.path(plot_dir, "Figure3_pathogen_tipping_point.png"),
-       fig3, width = 14, height = 5, dpi = 300, bg = "white")
-cat("Figure 3 saved.\n")
+       fig5, width = 14, height = 5, dpi = 300, bg = "white")
+cat("Figure 5 saved.\n")
 
 
 
@@ -761,13 +762,13 @@ cat("Figure 3 saved.\n")
 cat("\n", strrep("=", 55), "\n")
 cat("All figures saved to:", plot_dir, "\n")
 cat(strrep("=", 55), "\n")
-cat("Figure 1: Figure1_stressor_hierarchy.pdf/.png\n")
-cat("Figure 2: Figure2_spatial_refugia.pdf/.png\n")
-cat("Figure 3: Figure3_pathogen_tipping_point.pdf/.png\n")
+cat("Figure 3: Figure1_stressor_hierarchy.pdf/.png\n")
+cat("Figure 4: Figure2_spatial_refugia.pdf/.png\n")
+cat("Figure 5: Figure3_pathogen_tipping_point.pdf/.png\n")
 cat("\nKey values to record for Figure 4 annotation:\n")
 
 # Print key quantitative findings for Figure 4 annotation
-cat("\n--- Decline rates (Figure 1c) ---\n")
+cat("\n--- Decline rates (Figure 3c) ---\n")
 print(decline_rate |>
         select(climate, defaunation, pct_per_decade) |>
         arrange(defaunation, climate))
