@@ -48,17 +48,18 @@ folder_spdis <- file.path(data_prep, "SpDist")
 folder_AOI <- file.path(data_prep, "StudyArea")
 
 ### Download Underwood et al. (2026) ensemble SDMs ---- 
-# habitat suitability raster maps from Zenodo (10.5281/zenodo.21160109)
-# Users must save to file prior to moving past this point
-# Folders from  SDM  - output habitat suitability to be converted to matrices
-folder_SDMs <- file.path("./fungal-pathogen-SDM-ensemble-outputs/")
+# habitat suitability raster maps from Zenodo (10.5281/zenodo.21160110)
+# Users must save to files prior to moving past this point
+# Folders from  SDM_ensemble  - output habitat suitability to be converted to matrices
+folder_SDMs <- file.path("./fungal-pathogen-SDM-ensemble-outputs/data/SDM_ensemble")
 
 # Current (1981-2010 projection across MDG - 1 per spp)
 folder_current <- file.path(folder_SDMs, "current_projection")
-current_calo <- list.files(file.path(folder_current), pattern="calo", full.names = T) # 1 x current SDM ensemble prediction for C. paniculatum (endemic tree)
-current_ <- list.files(file.path(folder_current), pattern="vertlept", full.names = T) # 1 x current SDM ensemble prediction for L. calophylli (fungal wilt)
+current_calo <- list.files(file.path(folder_current), pattern="calo", full.names = T) # 1 x current SDM ensemble prediction for "calo" (C. paniculatum - endemic, vulnerable tree)
+current_ <- list.files(file.path(folder_current), pattern="vertlept", full.names = T) # 1 x current SDM ensemble prediction for "vertlept" (L. calophylli - fungal wilt)
 
 # Future (2011-2040, 2041-2070, 2071-2100 for SSPs 126, 370 and 585 across MDG - 9 per spp)
+# Note: this workflow originally included scenario SSP370 but this was removed prior to publication
 folder_future <- file.path(folder_SDMs, "future_prediction")
 future_calo <- list.files(file.path(folder_future), pattern="calo", full.names = T)
 future_ <- list.files(file.path(folder_future), pattern="vertlept", full.names = T)
@@ -147,12 +148,13 @@ caz_1k <- terra::rast(file.path(folder_AOI, "CAZ_1km.tif"))
 #==============================================================================#
 
 # This section leaves habitat suitability maps at their original extent (MDG) and resolution (1km)
-# Convert all habitat maps to matrices and write to files
+# Convert all habitat maps to matrices and write to file
 for (map_name in names(habmaps)) {
   # Get the current raster from the list
   current_rast <- habmaps[[map_name]]
   
-  # Extract only the first layer (predictions have 5 layers from SDM output including error and uncertainty layers)
+  # Extract only the first layer
+  # Note: choosing only the actual prediction layer, as the raster outputs from the SDM ensembles have 5 layers including error and uncertainty layers
   if (terra::nlyr(current_rast) > 1) {
     current_rast <- current_rast[[1]]  # Extract just the first layer
     cat("Extracted first layer from", map_name, "\n") 

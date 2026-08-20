@@ -1,13 +1,6 @@
 # Climate change, defaunation and disease interact to accelerate biodiversity loss in a tropical hotspot
 
-Reproducible R workflow for the spatially explicit, individual-based population
-simulations (RangeShiftR v3.0.0) and figures found in our study named above. The model
-projects range dynamics of *Calophyllum paniculatum* across the CAZ+ corridor,
-Madagascar, under combined climate change, land cover change (deforestation), defaunation (loss of lemur-mediated
-seed dispersal) and fungal-wilt pathogen pressure.
-
 ## Authors
-
 
 Emma L Underwood<sup>1,*</sup>, Kerry A Brown<sup>1</sup>, Rebekka Allgayer<sup>2</sup>, Mark Mulligan<sup>3</sup>, Nigel Walford<sup>1</sup>, Jette Wolff<sup>4</sup>
 
@@ -21,12 +14,12 @@ Emma L Underwood<sup>1,*</sup>, Kerry A Brown<sup>1</sup>, Rebekka Allgayer<sup>
 4. Institute of Biochemistry and Biology, University of Potsdam, Maulbeerallee 3, 14469, Potsdam, Germany
 
 
-*Corresponding author: Emma L Underwood
+**Corresponding author**: Emma L Underwood
 
-Email: [elmah2707@gmail.com](mailto:elmah2707@gmail.com)
+**Email**: [elmah2707@gmail.com](mailto:elmah2707@gmail.com)
 
 
-Code was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
+Code in this repository was implemented by **[ELU]** with contributions from **[JW]** and **[RA]**.
 
 
 ## Funding
@@ -82,17 +75,19 @@ pak::pak("RangeShifter/RangeShiftR-pkg/RangeShiftR@v3.0.0")
 **Programming environment used**
 
 - Platform: x86_64-pc-linux-gnu
-- R version: *R version 4.5.2 (2025-10-31)*
-- Attached R packages: RangeShiftR (3.0.0), terra (1.9-11), data.table (1.18.2.1), dplyr (1.2.0), tidyr (1.3.2), ggplot2 (4.0.2),
-  patchwork (1.3.2), cowplot (1.2.0), scales (1.4.0), viridis (0.6.5), foreach (1.5.2), doParallel (1.0.17).
+- *R* version: 4.5.2 (2025-10-31)
+- Attached *R* packages: *RangeShiftR* (3.0.0), *terra* (1.9-11), *data.table* (1.18.2.1), *dplyr* (1.2.0), *tidyr* (1.3.2), *ggplot2* (4.0.2),
+  *patchwork* (1.3.2), *cowplot* (1.2.0), *scales* (1.4.0), *viridis* (0.6.5), *foreach* (1.5.2), *doParallel* (1.0.17).
+
+### Package references
 
 
 **Additional (non-R) software used**
 
-- **QGIS** *[3.34.6]* — final spatial figures (manuscript Figure 1, Figure 4,
+- **QGIS** *[3.34.6 LTR]* — final spatial figures (manuscript Figure 1, Figure 4,
   Supplementary Figure S4) were composed in QGIS from the rasters and point
-  layers written by `03__occupancy_probability.R`.
-- **Canva** — final layout and annotation of several figures (see *Details*).
+  data written in `03__occupancy_probability.R`.
+- **Canva** — final layouts, colours, fonts and annotation of several figures (see *Details*).
 
 **Repository version / release**
 
@@ -112,12 +107,9 @@ The exact repository state accompanying the manuscript is tagged in Git as a rel
 
 - `data/StudyArea/CAZ_AOI.shp` — CAZ corridor area of interest (protected areas
   joined via convex hull).
-- `data/StudyArea/calo_current_CAZ_100m.tif`, `CAZ_100m.tif`, `MDG_template_1km.tif`
-  — study-area templates (extent, resolution, CRS ESRI:102022) used to align all
-  layers and to place model output in real-world coordinates.
 - `data/StudyArea/WDPA_clipCAZ.shp` — protected-area boundaries (spatial context) clipped to study exent.
     https://www.protectedplanet.net/. ©ProtectedPlanet 2014-2026. All rights reserved
-- `data/StudyArea/calo_ecoregsA_intersect.shp` — ecoregion polygons (context for map background).
+- `data/StudyArea/calo_ecoregsA_intersect.shp` — clipped ecoregion polygons based on *C. paniculatum* presence (context for Figure 1a map background).
     https://rcmrd.africageoportal.com/datasets/rcmrd::africa-ecoregions
 
 **Generated data (produced by the scripts; not tracked in Git)**
@@ -166,12 +158,12 @@ The exact repository state accompanying the manuscript is tagged in Git as a rel
 via emigration probability (0.20 = Low, 0.10 = Medium, 0.05 = High), and
 pathogen-introduction timing across three out of four batches:
 
-| Batch | Climate | Defaunation | Pathogen introduced | n |
+| Batch | Climate | Defaunation | Pathogen introduced | # n |
 |-------|---------|-------------|---------------------|---|
 | 1 | Current / SSP1 / SSP5 | Low / Medium / High | none (baseline) | 9 |
-| 2 | Current / SSP1 / SSP5 | Low / Medium / High | year 100 (current) / 101 (SSP) | 9 |
-| 3 | SSP1 / SSP5 | Low / Medium / High | year 131 (31-yr pre-conditioning) | 6 |
-| 4 | SSP1 / SSP5 | Low / Medium / High | year 161 (61-yr pre-conditioning) | 6 |
+| 2 | Current / SSP1 / SSP5 | Low / Medium / High | year 100 (current climate) / 101 (SSP) | 9 |
+| 3 | SSP1 / SSP5 | Low / Medium / High | year 131 (31-yr prior climate change exposure) | 6 |
+| 4 | SSP1 / SSP5 | Low / Medium / High | year 161 (61-yr prior climate change exposure) | 6 |
 
 SSP3 was evaluated during development and excluded from our final study.
 The scenario-to-`sim_id` map is written to
@@ -191,19 +183,19 @@ source("04__publication_figures.R")   # main manuscript figures
 
 `01__simulations.R` is memory-intensive; it is designed to run in sim-index
 chunks (e.g. `1:9`, `10:18`, `19:30`) as separate HPC jobs. 
-Set any cluster-specific library paths for your HPC.
+Note: Cluster-specific library paths may need to be added.
 
 **Figures (transparency for review).** Final manuscript figures were
 assembled from a mix of R, QGIS and Canva; R outputs are the analytical
 originals and differ only in fonts, colours, annotation, and cropping.
 
-| Manuscript figure | Produced with | Source in this repository |
+| Manuscript figure | Software used | Source in this repository |
 |-------------------|---------------|---------------------------|
 | Figure 1 | QGIS only | *(no R code)* — study-area / SDM map |
 | Figure 2 | Canva only | *(no R code)* — conceptual diagram |
-| Figure 3 | R → Canva | `04__publication_figures.R` (occupancy trajectories + decline-rate heatmap) |
-| Figure 4 | R rasters → QGIS | `03__occupancy_probability.R` (`OccRasters` / `OccPoints`) |
-| Figure 5 | R → Canva (Medium climate removed) | `04__publication_figures.R` (years-to-extinction heatmap, computed from Range files) |
+| Figure 3 | R, Canva | `04__publication_figures.R` (occupancy trajectories + decline-rate heatmap) |
+| Figure 4 | R rasters, QGIS | `03__occupancy_probability.R` (`OccRasters` / `OccPoints`) |
+| Figure 5 | R, Canva (Medium climate removed) | `04__publication_figures.R` (years-to-extinction heatmap, computed from Range files) |
 | Figure S1 | Canva only | *(no R code)* |
 | Figure S2 | R | baseline population dynamics ± SD, Sim 1 (`02__process_results.R`) |
 | Figure S3 | R | stage composition, Sims 1,2,4,5,6,8,9,10,12 (`02__process_results.R`) |
