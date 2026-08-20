@@ -9,7 +9,7 @@ seed dispersal) and fungal-wilt pathogen pressure.
 ## Authors
 
 
-Emma L Underwood^1^*, Kerry A Brown^1^, Rebekka Allgayer^2^, Mark Mulligan^3^, Nigel Walford^1^, Jette Wolff^4^
+Emma L Underwood<sup>1,*</sup>, Kerry A Brown<sup>1</sup>, Rebekka Allgayer<sup>2</sup>, Mark Mulligan<sup>3</sup>, Nigel Walford<sup>1</sup>, Jette Wolff<sup>4</sup>
 
 
 1. Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
@@ -22,6 +22,7 @@ Emma L Underwood^1^*, Kerry A Brown^1^, Rebekka Allgayer^2^, Mark Mulligan^3^, N
 
 
 *Corresponding author: Emma L Underwood
+
 Email: [elmah2707@gmail.com](mailto:elmah2707@gmail.com)
 
 
@@ -163,7 +164,7 @@ The exact repository state accompanying the manuscript is tagged in Git as a rel
 **Experimental design (30 simulations).** Three climate scenarios
 (`current`, SSP1-2.6 = "Low", SSP5-8.5 = "High"), three defaunation levels set
 via emigration probability (0.20 = Low, 0.10 = Medium, 0.05 = High), and
-pathogen-introduction timing across four batches:
+pathogen-introduction timing across three out of four batches:
 
 | Batch | Climate | Defaunation | Pathogen introduced | n |
 |-------|---------|-------------|---------------------|---|
