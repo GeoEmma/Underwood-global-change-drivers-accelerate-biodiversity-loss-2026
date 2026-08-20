@@ -9,7 +9,7 @@ seed dispersal) and fungal-wilt pathogen pressure.
 ## Authors
 
 
-Emma L Underwood^1,*^, Kerry A Brown^1^, Rebekka Allgayer^2^, Mark Mulligan^3^, Nigel Walford^1^, Jette Wolff^4^.
+Emma L Underwood^1^*, Kerry A Brown^1^, Rebekka Allgayer^2^, Mark Mulligan^3^, Nigel Walford^1^, Jette Wolff^4^
 
 
 1. Department of Geography, Geology, and the Environment, Centre for Engineering, Environment and Society Research (CEESR), Kingston University, Penrhyn Rd, Kingston upon Thames, KT1 2EE, UK
